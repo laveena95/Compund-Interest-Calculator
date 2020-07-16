@@ -19,8 +19,10 @@ class CalculatorController extends Controller
         $day = $request -> input('day');
         $no_of_time = $request -> input('no_of_time');
 
-        $CI = ($principle_amount*(1+($interest/$no_of_time))^($year*$no_of_time));
-       return redirect('/calculator')->with('info','Your Compond Interest is :'.$CI);
+        $R1 = $interest/100;
+        $R2 = $year + ($month/12) + ($day/365);
+        $CI = $principle_amount*(pow(($R1/$no_of_time)+1,$no_of_time*$R2));
+        return redirect('/calculator')->with('info','Your Compond Interest is :'.$CI);
         
      }
 }
